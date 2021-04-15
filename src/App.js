@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import Navigation from "./js/presenters/navigation";
+import NavigationSignin from "./js/presenters/navigationSignin"
+import NavigationSignup from "./js/presenters/navigationSignup"
+import NavigationSignout from "./js/presenters/navigationSignout"
 
-function App() {
+
+const goToHomePageHref = "#home";
+const goToUserProfileHref = "#userProfile";
+
+// The main app container
+function App({ measurementsModel, userModel }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navigation userModel={userModel}>
+        <NavigationSignin userModel={userModel} />
+        <NavigationSignup userModel={userModel} />
+        <NavigationSignout userModel={userModel}  goToHomePageHref={goToHomePageHref} goToUserProfileHref={goToUserProfileHref} />
+      </Navigation>
     </div>
   );
 }
