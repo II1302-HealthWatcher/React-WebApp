@@ -1,17 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+//import firebaseConfig from "./js/firebaseConfig";
+//import MeasurementsModel from "./js/MeasurementsModel";
+//import UserModel from "./js/UserModel";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+//const measurementsModel = new MeasurementsModel();
+//const userModel = new UserModel({ measurementsModel: measurementsModel });
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const measurementsModel = null;
+const userModel = null;
+
+ReactDOM.render(<App measurementsModel={measurementsModel} userModel={userModel} />, document.getElementById("app"));
