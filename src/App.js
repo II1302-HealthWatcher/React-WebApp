@@ -1,5 +1,6 @@
 import './App.css';
 import React from "react";
+import ShowView from "./js/presenters/viewManager"
 import Navigation from "./js/presenters/navigation";
 import NavigationSignin from "./js/presenters/navigationSignin"
 import NavigationSignup from "./js/presenters/navigationSignup"
@@ -20,10 +21,23 @@ function App({ measurementsModel, userModel }) {
         <NavigationSignup userModel={userModel} />
         <NavigationSignout userModel={userModel} goToHomePageHref={goToHomePageHref} goToUserProfileHref={goToUserProfileHref} />
       </Navigation>
-      <Homepage />
+      <ShowView hash="#home">
+        <div>
+        <Homepage />
+        </div>
+      </ShowView>
       <ToastContainer />
     </div>
   );
 }
+
+function defaultRoute() {
+  if (!["#home", "#userProfile"].find(knownRoute =>
+    knownRoute === window.location.hash))
+    window.location.hash = "#home";
+}
+
+defaultRoute();
+window.addEventListener("hashchange", defaultRoute);
 
 export default App;
