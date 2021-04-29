@@ -40,5 +40,3 @@ const NavigationSigninView = ({ setEmail, setPassword, handleSignin, show, handl
 
 
 export default NavigationSigninView;
-
-
