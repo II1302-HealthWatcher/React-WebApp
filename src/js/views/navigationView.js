@@ -1,7 +1,7 @@
 import {Navbar, Nav, Row, Col} from "react-bootstrap";
 import {HouseFill} from "react-bootstrap-icons"
 const NavigationView = ({component, toggleState, setToggleState, handleClose}) =>
-  <Navbar expand="sm" bg="dark" variant="dark">
+  <Navbar fixed="top" expand="sm" bg="dark" variant="dark" className="shadow z-depth-3">
     <Navbar.Brand onClick = {(e) => handleClose()} href="/">
     <Row>
       <Col>
@@ -15,8 +15,9 @@ const NavigationView = ({component, toggleState, setToggleState, handleClose}) =
     <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick = {(e) => setToggleState()}/>
     <Navbar.Collapse in = {toggleState} id="responsive-navbar-nav" onClick = {(e) => handleClose()}>
       <Nav className="ml-auto">
-	  <Nav.Link href="#home" className = "navButton pr-3 pl-3"><HouseFill class="houseFill"  /> Home</Nav.Link>
+	     <Nav.Link href="#home" className = "navButton pr-3 pl-3"><HouseFill class="houseFill"  />Home</Nav.Link>
         {component}
+        <Nav.Link href="#userProfile" className = "navButton pr-3 pl-3">Profile</Nav.Link>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
