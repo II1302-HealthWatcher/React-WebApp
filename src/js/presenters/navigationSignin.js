@@ -11,7 +11,7 @@ function NavigationSignin({ userModel }) {
     return React.createElement(NavigationSigninView, {
         setEmail: (email) => setEmail(email),
         setPassword: (password) => setPassword(password),
-        handleSignin: ()=> console.log("Not implemented") /*() => userModel.loginUser(email, password)*/,
+        handleSignin: () => userModel.loginUser(email, password),
         show: showSignin,
         handleShow: () => setShowSignin(true),
         handleClose: () => setShowSignin(false)
