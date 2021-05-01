@@ -7,6 +7,7 @@ import NavigationSignup from "./js/presenters/navigationSignup"
 import NavigationSignout from "./js/presenters/navigationSignout"
 import Homepage from "./js/presenters/homepage";
 import UserProfile from "./js/presenters/userProfile";
+import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
 
@@ -24,12 +25,12 @@ function App({ measurementsModel, userModel }) {
       </Navigation>
       <ShowView hash="#home">
         <div>
-        <Homepage />
+		  <Homepage />
         </div>
       </ShowView>
       <ShowView hash="#userProfile">
         <div>
-        <UserProfile />
+		  <UserProfile />
         </div>
       </ShowView>
       <ToastContainer />
