@@ -29,6 +29,7 @@ class UserModel {
         });
     }
 
+    // Performs login to existing account and fills the userModel with the user data.
     loginUser(email, password) {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(result => {
@@ -43,6 +44,7 @@ class UserModel {
 
     }
 
+
     logoutUser() {
         firebase.auth().signOut().then(() => {
             this.emptyUserModelData();
@@ -53,6 +55,8 @@ class UserModel {
         });
     }
 
+    // Creates a user, updates the profile with the displayName (deviceID), and inserts the inital user data into the database
+    // If an error occures, empty the userModel data and report the error.
     signupUser(email, password, deviceID) {
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -71,6 +75,7 @@ class UserModel {
 
     }
 
+    // Fetches health measurments from the database, and notifies the userModel observers when any changes occur on the user's health measurments and notify the observers (Realtime database).
     fillUserMeasurmentsListFromDb() {
 
         this.dbref.on('value', (snapshot) => {
@@ -83,6 +88,7 @@ class UserModel {
 
     }
 
+    // Sets the initial user data in the database.
     setInitialDbUserData({ deviceID, email }) {
         this.dbref.set({
             deviceID: deviceID,
@@ -91,7 +97,7 @@ class UserModel {
         });
     }
 
-
+    // Fills the userModel data and sets the login state, in addition to the database reference.
     populateUserModelData({ loggedIn, user }) {
         this.loggedIn = loggedIn;
         this.uid = user.uid;
@@ -103,16 +109,19 @@ class UserModel {
         this.notifyObservers();
     }
 
+    // Reports an error and notify the observers.
     reportError(code, message) {
         this.errorData = { code: code, message: message };
         this.notifyObservers();
     }
+
 
     emptyErrorData() {
         this.errorData = null;
         this.notifyObservers();
     }
 
+    // Re-Defines the loggedIn as false and uid, deviceID, email and dbref as null.
     emptyUserModelData() {
         this.loggedIn = false;
         this.uid = null;
@@ -122,14 +131,17 @@ class UserModel {
         this.notifyObservers();
     }
 
+    // Adds an observer to the userModel.
     addObserver(callback) {
         this.subscribers = this.subscribers.concat(callback);
     }
 
+    // Removes the observer from the userModel.
     removeObserver(obs) {
         this.subscribers = this.subscribers.filter(o => { return o !== obs; });
     }
 
+    // Notifies the obvservers after any changes.
     notifyObservers() {
         this.subscribers.forEach(callback => {
             try {
