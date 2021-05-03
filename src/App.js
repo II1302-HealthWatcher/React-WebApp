@@ -10,7 +10,7 @@ import UserProfile from "./js/presenters/userProfile";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
-
+const goToHome = () => window.location.hash = "home";
 const goToHomePageHref = "#home";
 const goToUserProfileHref = "#userProfile";
 
@@ -25,12 +25,12 @@ function App({ measurementsModel, userModel }) {
       </Navigation>
       <ShowView hash="#home">
         <div>
-		  <Homepage />
+          <Homepage />
         </div>
       </ShowView>
       <ShowView hash="#userProfile">
         <div>
-		  <UserProfile />
+          <UserProfile userModel={userModel} measurementsModel={measurementsModel} navToHome={goToHome} />
         </div>
       </ShowView>
       <ToastContainer />
