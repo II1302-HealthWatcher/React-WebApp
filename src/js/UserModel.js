@@ -12,15 +12,17 @@ class UserModel {
         this.email = null;
         this.dbref = null;
         this.errorData = null;
-        
+
         if (firebase.auth().currentUser) {
             this.populateUserModelData({ loggedIn: true, user: firebase.auth().currentUser });
             this.fillUserMeasurmentsListFromDb();
+
         }
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 this.populateUserModelData({ loggedIn: true, user: user });
                 this.fillUserMeasurmentsListFromDb();
+
             } else {
                 this.emptyUserModelData();
             }
@@ -32,7 +34,6 @@ class UserModel {
             .then(result => {
                 if (result.user) {
                     this.populateUserModelData({ loggedIn: true, user: result.user });
-                    this.fillUserMeasurmentsListFromDb();
                 }
             })
             .catch(err => {
@@ -71,13 +72,15 @@ class UserModel {
     }
 
     fillUserMeasurmentsListFromDb() {
-        let measurmentsList = [];
-        this.dbref.once('value').then((snapshot) => {
-            measurmentsList = snapshot.val().measurementsList;
-            if (measurmentsList) {
-                this.measurementsModel.fillMeasurementsList(measurmentsList);
+
+        this.dbref.on('value', (snapshot) => {
+            let updatedMeasurmentsList = [];
+            updatedMeasurmentsList = snapshot.val().measurementsList;
+            if (updatedMeasurmentsList) {
+                this.measurementsModel.fillMeasurementsList(updatedMeasurmentsList);
             }
         });
+
     }
 
     setInitialDbUserData({ deviceID, email }) {
