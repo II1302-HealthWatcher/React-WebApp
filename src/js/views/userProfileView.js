@@ -6,7 +6,7 @@ const stateMessage = (x) =>{
   console.log(JSON.stringify(x))
 }
 
-const UserProfileView = ({measurementsList, requestSort, deviceID, sortConfig})=>{
+const UserProfileView = ({sortableList, requestSort, deviceID, sortConfig})=>{
   /* For deciding what CSS to use when state changes */
 
   const getClassNamesFor = (name) => {
@@ -26,7 +26,7 @@ const UserProfileView = ({measurementsList, requestSort, deviceID, sortConfig})=
         </Row>
         <Row className="pt-5 pb-5">
           <div>
-            <h5 className="font-weight-bold">This data over time</h5><br/>
+            <h5 className="font-weight-bold">This is the data over time for the device : {deviceID}</h5><br/>
             <p>Click the table headings to sort by value</p>
           </div>
           <Table bordered striped>
@@ -35,35 +35,35 @@ const UserProfileView = ({measurementsList, requestSort, deviceID, sortConfig})=
                 <th>
                   Date
                   <button type="button"
-                  onClick={() => requestSort("date")}
-                  className={getClassNamesFor("date")}>
+                  onClick={() => requestSort("MeasurementDate")}
+                  className={getClassNamesFor("MeasurementDate")}>
                   </button>
                 </th>
                 <th>
                   Pulse
                   <button type="button"
-                  onClick={() => requestSort("pulse")}
-                  className={getClassNamesFor("pulse")}>
+                  onClick={() => requestSort("HeartPulse")}
+                  className={getClassNamesFor("HeartPulse")}>
                   </button>
                 </th>
                 <th>
                   Temperature
                   <button type="button"
-                  onClick={() => requestSort("temperature")}
-                  className={getClassNamesFor("temperature")}>
+                  onClick={() => requestSort("BodyTemperature")}
+                  className={getClassNamesFor("BodyTemperature")}>
                   </button>
                 </th>
                 <th>
                   Oxygen level
                   <button type="button"
-                  onClick={() => requestSort("oxygen")}
-                  className={getClassNamesFor("oxygen")}>
+                  onClick={() => requestSort("BloodOxygenLevel")}
+                  className={getClassNamesFor("BloodOxygenLevel")}>
                   </button>
                 </th>
               </tr>
             </thead>
             <tbody>
-              {measurementsList.map((data, i)=>(
+              {sortableList.map((data, i)=>(
                 <tr key={i}>
                   <td>{data.MeasurementDate}</td>
                   <td>{data.HeartPulse} bpm</td>
