@@ -2,21 +2,51 @@ import React from "react";
 import useModelProp from "../useModelProp";
 import UserProfileView from "../views/userProfileView"
 
-function UserProfile({ measurementsModel, userModel, navToHome }) {
 
+function UserProfile({userModel, measurementsModel, navToHome}) {
     const measurementsList = useModelProp(measurementsModel, "measurementsList"); // Observes the measurmentsList in the measurementsModel
     const loggedIn = useModelProp(userModel, "loggedIn"); // Observes the login state
+    const [sortConfig, setSortConfig] = React.useState(null);
+    const sortableList = [...measurementsList];
+    const deviceID = useModelProp(userModel, "deviceID");
 
-    // If user is not logged in and tries to access this page using the #userProfile hash, the user will be redirected to the home page
-    if (!loggedIn) { 
+
+    if (!loggedIn) {
         navToHome();
     }
+
+    if(sortConfig !== null){
+      sortableList.sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) {
+        return sortConfig.direction === "ascending" ? -1 : 1;
+      }
+      if (a[sortConfig.key] > b[sortConfig.key]) {
+        return sortConfig.direction === "ascending" ? 1 : -1;
+      }
+      return 0;
+      });
+    }
+
+    const requestSort = (key) => {
+      let direction = "ascending";
+      if (
+        sortConfig &&
+        sortConfig.key === key &&
+        sortConfig.direction === "ascending"
+      ) {
+        direction = "descending";
+      }
+      setSortConfig({key, direction});
+    };
 
     return React.createElement(
         React.Fragment,
         {},
         React.createElement(UserProfileView, {
-            measurementsList: [...measurementsList] // Pass a deep copy of the measurementsList to the view
+            sortableList: sortableList, // Pass a deep copy of the measurementsList to the view
+            requestSort: requestSort,
+            deviceID: deviceID,
+            sortConfig: sortConfig
         })
     );
 }
