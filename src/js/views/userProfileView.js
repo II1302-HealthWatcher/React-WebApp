@@ -6,7 +6,7 @@ const stateMessage = (x) =>{
   console.log(JSON.stringify(x))
 }
 
-const UserProfileView = ({sortableList, requestSort, deviceID, sortConfig})=>{
+const UserProfileView = ({measurementsList, requestSort, deviceID, sortConfig})=>{
   /* For deciding what CSS to use when state changes */
 
   const getClassNamesFor = (name) => {
@@ -63,12 +63,12 @@ const UserProfileView = ({sortableList, requestSort, deviceID, sortConfig})=>{
               </tr>
             </thead>
             <tbody>
-              {sortableList.map((data, i)=>(
+              {measurementsList.map((data, i)=>(
                 <tr key={i}>
                   <td>{data.MeasurementDate}</td>
                   <td>{data.HeartPulse} bpm</td>
-                  <td>{data.BloodOxygenLevel} &#8451;</td>
-                  <td>{data.BodyTemperature}%</td>
+                  <td>{data.BodyTemperature} &#8451;</td>
+                  <td>{data.BloodOxygenLevel}%</td>
                 </tr>
               ))}
             </tbody>

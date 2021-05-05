@@ -7,7 +7,6 @@ function UserProfile({userModel, measurementsModel, navToHome}) {
     const measurementsList = useModelProp(measurementsModel, "measurementsList"); // Observes the measurmentsList in the measurementsModel
     const loggedIn = useModelProp(userModel, "loggedIn"); // Observes the login state
     const [sortConfig, setSortConfig] = React.useState(null);
-    const sortableList = [...measurementsList];
     const deviceID = useModelProp(userModel, "deviceID");
 
 
@@ -16,7 +15,7 @@ function UserProfile({userModel, measurementsModel, navToHome}) {
     }
 
     if(sortConfig !== null){
-      sortableList.sort((a, b) => {
+      measurementsList.sort((a, b) => {
       if (a[sortConfig.key] < b[sortConfig.key]) {
         return sortConfig.direction === "ascending" ? -1 : 1;
       }
@@ -43,7 +42,7 @@ function UserProfile({userModel, measurementsModel, navToHome}) {
         React.Fragment,
         {},
         React.createElement(UserProfileView, {
-            sortableList: sortableList, // Pass a deep copy of the measurementsList to the view
+            measurementsList: measurementsList, // Pass a deep copy of the measurementsList to the view
             requestSort: requestSort,
             deviceID: deviceID,
             sortConfig: sortConfig
