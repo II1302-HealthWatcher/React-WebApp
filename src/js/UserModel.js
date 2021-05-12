@@ -92,8 +92,7 @@ class UserModel {
     setInitialDbUserData({ deviceID, email }) {
         this.dbref.set({
             deviceID: deviceID,
-            email: email,
-            measurmentsList: []
+            email: email
         });
     }
 
