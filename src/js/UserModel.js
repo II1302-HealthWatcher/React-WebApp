@@ -90,7 +90,7 @@ class UserModel {
 
     // Sets the initial user data in the database.
     setInitialDbUserData({ deviceID, email }) {
-        this.dbref.set({
+        this.dbref.update({
             deviceID: deviceID,
             email: email
         });
