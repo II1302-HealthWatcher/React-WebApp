@@ -26,7 +26,7 @@ const UserProfileView = ({sortableList, requestSort, deviceID, sortConfig})=>{
         </Row>
         <Row className="pt-5 pb-5">
           <div>
-            <h5 className="font-weight-bold">This is the data over time for the device : {deviceID}</h5><br/>
+            <h5 data-testid="deviceIDTextElement" className="font-weight-bold">This is the data over time for the device : {deviceID}</h5><br/>
             <p>Click the table headings to sort by value</p>
           </div>
           <Table bordered striped>
@@ -62,7 +62,7 @@ const UserProfileView = ({sortableList, requestSort, deviceID, sortConfig})=>{
                 </th>
               </tr>
             </thead>
-            <tbody>
+            <tbody data-testid="measurementsListTableElement">
               {sortableList.map((data, i)=>(
                 <tr key={i}>
                   <td>{data.MeasurementDate}</td>
