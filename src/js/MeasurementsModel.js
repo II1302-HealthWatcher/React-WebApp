@@ -2,10 +2,12 @@ class MeasurementsModel {
     constructor() {
         this.subscribers = [];
         this.measurementsList = [];
+        this.criticalData = [];
     }
 
     fillMeasurementsList(measurementsList) {
         this.measurementsList = [...measurementsList].reverse();
+        this.checkCriticalValues();
         this.notifyObservers();
     }
 
@@ -15,6 +17,49 @@ class MeasurementsModel {
 
     emptyLocalMeasurementsList() {
         this.measurementsList = [];
+        this.emptyCriticalData();
+        this.notifyObservers();
+    }
+
+    checkCriticalValues() {
+        if (this.measurementsList !== []) {
+            let title = "Critical Measurment Detected";
+            for (let measurementEntry of this.measurementsList) {
+                let measurementDate = measurementEntry.MeasurementDate;
+                let heartPulse = measurementEntry.HeartPulse;
+                let bodyTemperature = measurementEntry.BodyTemperature;
+                let bloodOxygenLevel = measurementEntry.BloodOxygenLevel;
+
+                if (heartPulse < 55 || heartPulse > 170) {
+                    let criticalMessage = "Critical heart rate detected at " + measurementDate;
+                    this.reportCriticalData(title, criticalMessage);
+                    break;
+                }
+
+                if (bodyTemperature < 36 || bodyTemperature > 38) {
+                    let criticalMessage = "Critical body temperature detected at " + measurementDate;
+                    this.reportCriticalData(title, criticalMessage);
+                    break;
+                }
+
+                if (bloodOxygenLevel < 95) {
+                    let criticalMessage = "Critical blood oxygen level detected at " + measurementDate;
+                    this.reportCriticalData(title, criticalMessage);
+                    break;
+                }
+
+            }
+        }
+    }
+
+    reportCriticalData(title, message) {
+        this.criticalData = { title: title, message: message };
+        this.notifyObservers();
+    }
+
+
+    emptyCriticalData() {
+        this.criticalData = null;
         this.notifyObservers();
     }
 
