@@ -31,19 +31,19 @@ class MeasurementsModel {
                 let bloodOxygenLevel = measurementEntry.BloodOxygenLevel;
 
                 if (heartPulse < 55 || heartPulse > 170) {
-                    let criticalMessage = "Critical heart rate detected at " + measurementDate;
+                    let criticalMessage = "Critical heart rate measurement was reported at " + measurementDate;
                     this.reportCriticalData(title, criticalMessage);
                     break;
                 }
 
                 if (bodyTemperature < 36 || bodyTemperature > 38) {
-                    let criticalMessage = "Critical body temperature detected at " + measurementDate;
+                    let criticalMessage = "Critical body temperature measurement was reported at " + measurementDate;
                     this.reportCriticalData(title, criticalMessage);
                     break;
                 }
 
                 if (bloodOxygenLevel < 95) {
-                    let criticalMessage = "Critical blood oxygen level detected at " + measurementDate;
+                    let criticalMessage = "Critical blood oxygen level measurement was reported at " + measurementDate;
                     this.reportCriticalData(title, criticalMessage);
                     break;
                 }
