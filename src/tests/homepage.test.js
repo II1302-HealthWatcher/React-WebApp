@@ -16,3 +16,11 @@ test('renders the homepage welcome text correctly', () => {
     let expectedTextContent = "Welcome to the HealthWatcher Webapp";
     expect(textContent).toBe(expectedTextContent);
 });
+
+test('renders the homepage title correctly', () => {
+	render(<Homepage />)
+	const titleTextElement = screen.getByTestId("titleTextElement");
+	let texttitleContent = titleTextElement.textContent
+	let expectedTitleContent = "Health Watcher";
+	expect(texttitleContent).toBe(expectedTitleContent);
+});
