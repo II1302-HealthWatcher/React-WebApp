@@ -9,7 +9,7 @@ const HomepageView = ()=>
           <img data-testid="logoElement" alt="Big logo" className="rounded mx-auto d-block mt-5 mb-5 pt-5 pl-4" width="350" height="300" src="android-chrome-512x512.png" />
         </Col>
         <Col className="col-md-5">
-          <h1 className="pt-4 color-text-blue darken-4 font-weight-bolder">Health Watcher</h1>
+          <h1 data-testid="titleTextElement" className="pt-4 color-text-blue darken-4 font-weight-bolder">Health Watcher</h1>
           <h5 data-testid="welcomeTextElement" className="pt-2 pb-3">Welcome to the HealthWatcher Webapp</h5>
           <h3 className="pb-3">(｡♥‿♥｡)</h3>
           <h6 className="mt-4 color-text-red font-weight-bold">What is HealthWatcher?</h6>
