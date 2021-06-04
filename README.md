@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This project is deployed on IBM Cloud using the cloud foundry app toolchain and can be accessed at the [link](https://healthwatcher-webapp-accountable-bat.eu-gb.mybluemix.net/).
+
 ## Available Scripts
 
 In the project directory, you can run:
